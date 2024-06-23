@@ -30,7 +30,7 @@ public class StoreController {
     }
 
     // -------read the company in json format with pagination----------
-    @RequestMapping(value = "/stores", method = RequestMethod.GET, produces = { "application/json" })
+    @GetMapping(value = "/stores", produces = { "application/json" })
     ResponseEntity<?> getAllStore(@RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "limit", defaultValue = "5") int limit) {
         PageRequest pageable = PageRequest.of(page, limit);
@@ -39,7 +39,7 @@ public class StoreController {
     }
 
     // --------------------update the store --------------------
-    @RequestMapping(value = "/store/{id}", method = RequestMethod.PUT, consumes = { "application/json" }, produces = {
+    @PutMapping(value = "/store/{id}", consumes = { "application/json" }, produces = {
             "application/json" })
     public ResponseEntity<?> update(@PathVariable(value = "id") Long storeId,
             @RequestBody Store storeDetails) {
@@ -55,7 +55,7 @@ public class StoreController {
     }
 
     // ------------------------search store ------------------------
-    @RequestMapping(method = RequestMethod.GET, value = "/store")
+    @GetMapping("/store")
     public ResponseEntity<?> search(@RequestParam(value = "search") String search) {
         StoreSpecificationsBuilder builder = new StoreSpecificationsBuilder();
         Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");

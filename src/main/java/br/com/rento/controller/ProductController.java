@@ -6,14 +6,12 @@ import br.com.rento.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +30,7 @@ public class ProductController {
     }
 
     // -------read the company in json format with pagination----------
-    @RequestMapping(value = "/products", method = RequestMethod.GET, produces = { "application/json" })
+    @GetMapping(value = "/products", produces = { "application/json" })
     ResponseEntity<?> findAll(@RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "limit", defaultValue = "5") int limit) {
         PageRequest pageable = PageRequest.of(page, limit);
@@ -41,7 +39,7 @@ public class ProductController {
     }
 
     // --------------------update the product --------------------
-    @RequestMapping(value = "/product/{id}", method = RequestMethod.PUT, consumes = { "application/json" }, produces = {
+    @PutMapping(value = "/product/{id}", consumes = { "application/json" }, produces = {
             "application/json" })
     public ResponseEntity<?> update(@PathVariable(value = "id") Long productId,
             @RequestBody Product productDetails) {
@@ -57,7 +55,7 @@ public class ProductController {
     }
 
     // ------------------------search product ------------------------
-    @RequestMapping(method = RequestMethod.GET, value = "/product")
+    @GetMapping("/product")
     public ResponseEntity<?> findAll(@RequestParam(value = "search") String search) {
         ProductSpecificationsBuilder builder = new ProductSpecificationsBuilder();
         Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");

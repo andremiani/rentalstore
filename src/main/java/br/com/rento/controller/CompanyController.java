@@ -44,7 +44,7 @@ public class CompanyController {
     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso")
     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
 
-    @RequestMapping(value = "/companies", method = RequestMethod.GET, produces = { "application/json" })
+    @GetMapping(value = "/companies", produces = { "application/json" })
     ResponseEntity<?> getAllCompany(@RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "limit", defaultValue = "5") int limit) {
         // Create a Pageable instance
@@ -54,7 +54,7 @@ public class CompanyController {
     }
 
     // --------------------update the company --------------------
-    @RequestMapping(value = "/company/{id}", method = RequestMethod.PUT, consumes = { "application/json" }, produces = {
+    @PutMapping(value = "/company/{id}", consumes = { "application/json" }, produces = {
             "application/json" })
     public ResponseEntity<?> updateCompany(@PathVariable(value = "id") Long companyId,
             @RequestBody Company companyDetails) {
@@ -70,7 +70,7 @@ public class CompanyController {
     }
 
     // ------------------------search company ------------------------
-    @RequestMapping(method = RequestMethod.GET, value = "/company")
+    @GetMapping("/company")
     public ResponseEntity<?> search(@RequestParam(value = "search") String search) {
         CompanySpecificationsBuilder builder = new CompanySpecificationsBuilder();
         Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");

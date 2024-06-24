@@ -22,13 +22,6 @@ The Rental Store Reservation System is a Spring Boot application designed to man
 
 ## Getting Started
 
-### Prerequisites
-
-- Java 17
-- Maven
-- IDE (IntelliJ, Eclipse, etc.)
-- MySQL or any preferred relational database
-
 ### Installation
 
 1. **Clone the repository:**
